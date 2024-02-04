@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userServiceImpl" class="com.cuprumz.aop.service.impl.UserServiceImpl"/>
+    <bean id="orderServiceImpl" class="com.cuprumz.aop.service.impl.OrderServiceImpl"/>
+
+    <bean id="logArgsAdvice" class="com.cuprumz.aop.advice.LogArgAdvice"/>
+    <bean id="logResultAdvice" class="com.cuprumz.aop.advice.LogResultAdvice"/>
+
+    <bean id="logArgAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="logArgsAdvice"/>
+        <property name="pattern" value="com.cuprumz.aop.service.impl.*.create.*"/>
+    </bean>
+
+    <bean id="logResultAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="logResultAdvice"/>
+        <property name="pattern" value="com.cuprumz.aop.service.impl.*.query.*"/>
+    </bean>
+
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+</beans>

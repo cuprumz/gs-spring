@@ -11,3 +11,5 @@ rootProject.name = 'gs-spring'
 include 'multi-datasource',
         'transaction'
 include 'spel'
+include 'spring-aop'
+
